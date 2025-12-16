@@ -25,11 +25,7 @@ module.exports = {
 
   plugins: ['@typescript-eslint'],
 
-  extends: [
-    '@react-native',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['@react-native', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended', 'plugin:storybook/recommended'],
 
   rules: {
     // base eslint

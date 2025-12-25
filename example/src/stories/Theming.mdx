@@ -1,0 +1,129 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title="Guides/Theming" />
+
+# Theming
+
+Customize the look and feel of all components using the theme system.
+
+## Using NeobrutalismThemeProvider
+
+Wrap your app with `NeobrutalismThemeProvider` to enable theming:
+
+```tsx
+import { NeobrutalismThemeProvider } from 'react-native-neobrutalism';
+
+function App() {
+  return (
+    <NeobrutalismThemeProvider>
+      {/* Your app components */}
+    </NeobrutalismThemeProvider>
+  );
+}
+```
+
+## Custom Theme
+
+Pass a `theme` prop to override default values:
+
+```tsx
+<NeobrutalismThemeProvider
+  theme={{
+    colors: {
+      primary: '#FF6B6B',
+      primaryForeground: '#FFFFFF',
+    },
+    shadow: {
+      offsetX: 6,
+      offsetY: 6,
+      color: '#333333',
+    },
+    border: {
+      width: 3,
+      radius: 8,
+    },
+  }}
+>
+  <App />
+</NeobrutalismThemeProvider>
+```
+
+## Default Theme Values
+
+### Colors
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `primary` | `#88AAEE` | Primary button background |
+| `primaryForeground` | `#000000` | Primary button text |
+| `secondary` | `#E0E0E0` | Secondary button background |
+| `secondaryForeground` | `#000000` | Secondary button text |
+| `warning` | `#FFDC58` | Warning button background |
+| `warningForeground` | `#000000` | Warning button text |
+| `danger` | `#FF6B6B` | Danger button background |
+| `dangerForeground` | `#000000` | Danger button text |
+| `success` | `#A3E635` | Success button background |
+| `successForeground` | `#000000` | Success button text |
+| `background` | `#FFFFFF` | Default background |
+| `foreground` | `#000000` | Default text color |
+| `border` | `#000000` | Border color |
+
+### Shadow
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `offsetX` | `4` | Horizontal shadow offset (px) |
+| `offsetY` | `4` | Vertical shadow offset (px) |
+| `color` | `#000000` | Shadow color |
+
+### Border
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `width` | `2` | Border width (px) |
+| `color` | `#000000` | Border color |
+| `radius` | `5` | Border radius (px) |
+
+### Button Sizes
+
+| Size | Padding H | Padding V | Font Size | Min Height |
+|------|-----------|-----------|-----------|------------|
+| `small` | 12px | 8px | 14px | 36px |
+| `default` | 16px | 10px | 16px | 40px |
+| `large` | 32px | 12px | 18px | 44px |
+
+## Accessing Theme in Components
+
+Use the `useNeobrutalismTheme` hook to access theme values:
+
+```tsx
+import { useNeobrutalismTheme } from 'react-native-neobrutalism';
+
+function MyComponent() {
+  const { theme, setTheme } = useNeobrutalismTheme();
+
+  return (
+    <View style={{ backgroundColor: theme.colors.primary }}>
+      <Text style={{ color: theme.colors.primaryForeground }}>
+        Themed content
+      </Text>
+    </View>
+  );
+}
+```
+
+## Runtime Theme Updates
+
+You can update the theme at runtime using `setTheme`:
+
+```tsx
+const { setTheme } = useNeobrutalismTheme();
+
+// Toggle to dark mode
+setTheme({
+  colors: {
+    background: '#1a1a1a',
+    foreground: '#ffffff',
+  },
+});
+```

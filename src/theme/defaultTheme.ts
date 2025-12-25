@@ -40,7 +40,7 @@ export const defaultTheme: NeobrutalismTheme = {
   border: {
     width: 2,
     color: '#000000',
-    radius: 0, // True brutalism = no radius
+    radius: 5, // Slight curve for softer neobrutalism look
   },
 
   spacing: {

@@ -1,0 +1,147 @@
+import { Meta, ArgTypes, Canvas, Story } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+A neobrutalism-styled button component with multiple variants, sizes, and press animations.
+
+## Import
+
+```tsx
+import { Button } from 'react-native-neobrutalism';
+```
+
+## Basic Usage
+
+```tsx
+<Button label="Click me" onPress={() => console.log('Pressed!')} />
+```
+
+<Canvas of={ButtonStories.Default} />
+
+## Variants
+
+Six visual variants are available:
+
+<Canvas of={ButtonStories.AllVariants} />
+
+```tsx
+<Button label="Primary" variant="primary" />
+<Button label="Secondary" variant="secondary" />
+<Button label="Warning" variant="warning" />
+<Button label="Danger" variant="danger" />
+<Button label="Success" variant="success" />
+<Button label="Outlined" variant="outlined" />
+```
+
+## Sizes
+
+Three size options:
+
+<Canvas of={ButtonStories.AllSizes} />
+
+```tsx
+<Button label="Small" size="small" />
+<Button label="Default" size="default" />
+<Button label="Large" size="large" />
+```
+
+## With Icons
+
+Add icons before or after the label:
+
+```tsx
+<Button
+  label="Add Item"
+  leftIcon={<Text>+</Text>}
+/>
+
+<Button
+  label="Next"
+  rightIcon={<Text>→</Text>}
+/>
+```
+
+<Canvas of={ButtonStories.WithLeftIcon} />
+
+## Full Width
+
+Make the button span the full container width:
+
+```tsx
+<Button label="Full Width" fullWidth />
+```
+
+<Canvas of={ButtonStories.FullWidth} />
+
+## Disabled State
+
+```tsx
+<Button label="Disabled" disabled />
+```
+
+<Canvas of={ButtonStories.Disabled} />
+
+## Custom Styling
+
+Override styles at the component level:
+
+```tsx
+<Button
+  label="Custom"
+  style={{ backgroundColor: 'purple' }}
+  textStyle={{ color: 'white', fontWeight: 'bold' }}
+  shadowStyle={{ backgroundColor: 'darkpurple' }}
+/>
+```
+
+### Disable Shadow
+
+Pass `shadowStyle={null}` to remove the shadow:
+
+```tsx
+<Button label="No Shadow" shadowStyle={null} />
+```
+
+### Disable Animation
+
+```tsx
+<Button label="No Animation" disableAnimation />
+```
+
+<Canvas of={ButtonStories.NoAnimation} />
+
+## Component-Level Theme Override
+
+Override theme values for a specific button:
+
+```tsx
+<Button
+  label="Custom Theme"
+  themeOverride={{
+    colors: { primary: '#FF0000' },
+    shadow: { offsetX: 8, offsetY: 8 },
+  }}
+/>
+```
+
+## Props
+
+<ArgTypes of={ButtonStories} />
+
+## Accessibility
+
+The Button component includes built-in accessibility support:
+
+- `accessibilityRole="button"` is set automatically
+- `accessibilityLabel` defaults to the `label` prop
+- `accessibilityState={{ disabled }}` reflects the disabled state
+
+```tsx
+<Button
+  label="Submit"
+  accessibilityLabel="Submit the form"
+/>
+```

@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# React Native Neobrutalism
+
+A customizable Neo-Brutalism UI components library for React Native with web support.
+
+## Features
+
+- **Neobrutalism Design** - Bold borders, offset shadows, high-contrast colors
+- **6 Button Variants** - Primary, Secondary, Warning, Danger, Success, Outlined
+- **3 Sizes** - Small, Default, Large
+- **Press Animations** - Satisfying shadow/translate effect on press
+- **Themeable** - Global theming with `NeobrutalismThemeProvider`
+- **Customizable** - Override styles at component level
+- **Cross-platform** - Works on iOS, Android, and Web
+
+## Installation
+
+```bash
+npm install react-native-neobrutalism
+# or
+yarn add react-native-neobrutalism
+```
+
+## Quick Start
+
+```tsx
+import { Button, NeobrutalismThemeProvider } from 'react-native-neobrutalism';
+
+function App() {
+  return (
+    <NeobrutalismThemeProvider>
+      <Button
+        label="Click me"
+        variant="primary"
+        onPress={() => console.log('Pressed!')}
+      />
+    </NeobrutalismThemeProvider>
+  );
+}
+```
+
+## What is Neobrutalism?
+
+Neobrutalism (or Neo-brutalism) is a design style characterized by:
+
+- **Bold, black borders** (typically 2px+)
+- **Offset drop shadows** that create a 3D effect
+- **High-contrast, saturated colors**
+- **Minimal or no border radius**
+- **Raw, unpolished aesthetic**
+
+This library implements these principles for React Native applications.
+
+---
+
+Explore the components in the sidebar to see live examples and interact with them.

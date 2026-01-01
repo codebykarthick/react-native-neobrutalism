@@ -23,9 +23,6 @@ yarn add react-native-neobrutalism
 ### Peer Dependencies
 
 ```bash
-# Required
-npm install react-native
-
 # Optional (for animations)
 npm install react-native-reanimated
 ```

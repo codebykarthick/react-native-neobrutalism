@@ -64,23 +64,23 @@ export function AccordionTrigger({
       alignItems: 'center',
       justifyContent: 'space-between',
       padding: theme.spacing.md,
-      backgroundColor: theme.colors.primary,
+      backgroundColor: disabled ? theme.colors.secondary : theme.colors.primary,
     }),
-    [theme.spacing.md, theme.colors.primary]
+    [theme.spacing.md, theme.colors.primary, theme.colors.secondary, disabled]
   );
 
   // Text styles
   const computedTextStyle: TextStyle = useMemo(
     () => ({
-      color: theme.colors.primaryForeground,
+      color: disabled ? '#888888' : theme.colors.primaryForeground,
       fontSize: 16,
       fontWeight: '600',
       flex: 1,
     }),
-    [theme.colors.primaryForeground]
+    [theme.colors.primaryForeground, disabled]
   );
 
-  const chevronColor = theme.colors.primaryForeground;
+  const chevronColor = disabled ? '#888888' : theme.colors.primaryForeground;
 
   return (
     <Pressable

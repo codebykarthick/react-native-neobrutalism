@@ -60,28 +60,29 @@ export function AccordionItem({
   const containerStyle: ViewStyle = useMemo(
     () => ({
       borderWidth: theme.border.width,
-      borderColor: theme.border.color,
+      borderColor: disabled ? theme.colors.secondary : theme.border.color,
       borderRadius: theme.border.radius,
-      backgroundColor: theme.colors.background,
+      backgroundColor: disabled
+        ? theme.colors.secondary
+        : theme.colors.background,
       marginBottom: theme.spacing.sm,
       overflow: 'hidden',
-      opacity: disabled ? 0.5 : 1,
     }),
-    [theme.border, theme.colors.background, theme.spacing.sm, disabled]
+    [theme.border, theme.colors, theme.spacing.sm, disabled]
   );
 
-  // Shadow styles
+  // Shadow styles - hidden when disabled
   const shadowStyle: ViewStyle = useMemo(
     () => ({
       position: 'absolute',
       top: theme.shadow.offsetY,
       left: theme.shadow.offsetX,
-      right: -theme.shadow.offsetX,
-      bottom: -theme.shadow.offsetY,
-      backgroundColor: theme.shadow.color,
+      width: '100%',
+      height: '100%',
+      backgroundColor: disabled ? 'transparent' : theme.shadow.color,
       borderRadius: theme.border.radius,
     }),
-    [theme.shadow, theme.border.radius]
+    [theme.shadow, theme.border.radius, disabled]
   );
 
   return (

@@ -1,0 +1,219 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as AccordionStories from './Accordion.stories';
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+A vertically stacked set of interactive headings that each reveal a section of content.
+
+## Import
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from 'react-native-neobrutalism';
+```
+
+## Basic Usage
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Section 1</AccordionTrigger>
+    <AccordionContent>
+      <Text>Content for section 1</Text>
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Section 2</AccordionTrigger>
+    <AccordionContent>
+      <Text>Content for section 2</Text>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+<Canvas of={AccordionStories.Default} />
+
+## Single vs Multiple
+
+### Single Mode (Collapsible)
+
+Only one section can be open at a time, and it can be collapsed:
+
+<Canvas of={AccordionStories.Default} />
+
+```tsx
+<Accordion type="single" collapsible>
+  {/* items */}
+</Accordion>
+```
+
+### Single Mode (Non-Collapsible)
+
+One section must always be open:
+
+<Canvas of={AccordionStories.SingleNonCollapsible} />
+
+```tsx
+<Accordion type="single" defaultValue="item-1">
+  {/* items */}
+</Accordion>
+```
+
+### Multiple Mode
+
+Multiple sections can be open simultaneously:
+
+<Canvas of={AccordionStories.Multiple} />
+
+```tsx
+<Accordion type="multiple">
+  {/* items */}
+</Accordion>
+```
+
+## With Default Value
+
+Open a specific section by default:
+
+<Canvas of={AccordionStories.WithDefaultValue} />
+
+```tsx
+<Accordion type="single" collapsible defaultValue="item-2">
+  {/* items */}
+</Accordion>
+```
+
+## With Icons
+
+Add icons to accordion triggers:
+
+<Canvas of={AccordionStories.WithIcons} />
+
+```tsx
+<AccordionTrigger leftIcon={<Text>📚</Text>}>
+  Documentation
+</AccordionTrigger>
+```
+
+## Disabled Items
+
+Disable specific accordion items:
+
+<Canvas of={AccordionStories.DisabledItem} />
+
+```tsx
+<AccordionItem value="item-2" disabled>
+  <AccordionTrigger>Disabled Section</AccordionTrigger>
+  <AccordionContent>
+    <Text>This content is not accessible.</Text>
+  </AccordionContent>
+</AccordionItem>
+```
+
+## Controlled State
+
+Control the accordion state externally:
+
+<Canvas of={AccordionStories.ControlledState} />
+
+```tsx
+const [value, setValue] = useState<string>('');
+
+<Accordion
+  type="single"
+  collapsible
+  value={value}
+  onValueChange={(v) => setValue(v as string)}
+>
+  {/* items */}
+</Accordion>
+```
+
+## Custom Theme
+
+<Canvas of={AccordionStories.CustomTheme} />
+
+```tsx
+<Accordion
+  type="single"
+  collapsible
+  themeOverride={{
+    shadow: { offsetX: 6, offsetY: 6 },
+    colors: { primary: '#FF6B6B' },
+    border: { radius: 12 },
+  }}
+>
+  {/* items */}
+</Accordion>
+```
+
+## FAQ Example
+
+A common use case for accordions:
+
+<Canvas of={AccordionStories.FAQExample} />
+
+## Props
+
+### Accordion
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `'single' \| 'multiple'` | `'single'` | Expansion mode |
+| `collapsible` | `boolean` | `false` | Allow collapsing all (single mode only) |
+| `defaultValue` | `string \| string[]` | - | Initially expanded item(s) |
+| `value` | `string \| string[]` | - | Controlled expanded item(s) |
+| `onValueChange` | `(value) => void` | - | Callback when expanded items change |
+| `themeOverride` | `NeobrutalismThemeOverride` | - | Theme overrides |
+| `style` | `ViewStyle` | - | Container styles |
+
+### AccordionItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **required** | Unique identifier for the item |
+| `disabled` | `boolean` | `false` | Disable this item |
+| `style` | `ViewStyle` | - | Container styles |
+
+### AccordionTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **required** | Trigger content |
+| `leftIcon` | `ReactNode` | - | Icon on the left side |
+| `chevronIcon` | `ReactNode` | - | Custom chevron icon |
+| `hideChevron` | `boolean` | `false` | Hide the chevron |
+| `style` | `ViewStyle` | - | Container styles |
+| `textStyle` | `TextStyle` | - | Text styles |
+
+### AccordionContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **required** | Content to display |
+| `style` | `ViewStyle` | - | Container styles |
+
+## Animation
+
+The accordion uses React Native Reanimated for smooth animations:
+
+- **Height animation**: Content smoothly expands/collapses
+- **Chevron rotation**: 180° rotation when expanded
+- **Duration**: 300ms for content, 200ms for chevron
+
+## Accessibility
+
+- `accessibilityRole="button"` on triggers
+- `accessibilityState={{ expanded, disabled }}` reflects current state
+- Keyboard navigation support
+- Clear focus indicators
+
+## Requirements
+
+This component requires `react-native-reanimated` (>=3.0.0) to be installed and configured in your project.

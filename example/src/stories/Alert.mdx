@@ -1,0 +1,136 @@
+import { Meta, ArgTypes, Canvas, Story } from '@storybook/addon-docs/blocks';
+import * as AlertStories from './Alert.stories';
+
+<Meta of={AlertStories} />
+
+# Alert
+
+A neobrutalism-styled alert component for displaying important messages to users.
+
+## Import
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from 'react-native-neobrutalism';
+```
+
+## Basic Usage
+
+```tsx
+<Alert>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>You can add components using the CLI.</AlertDescription>
+</Alert>
+```
+
+<Canvas of={AlertStories.Default} />
+
+## Variants
+
+Two variants are available:
+
+<Canvas of={AlertStories.AllVariants} />
+
+```tsx
+// Default variant (light background)
+<Alert variant="default">
+  <AlertTitle>Default Alert</AlertTitle>
+  <AlertDescription>Light background with dark text.</AlertDescription>
+</Alert>
+
+// Destructive variant (danger styling)
+<Alert variant="destructive">
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>Something went wrong.</AlertDescription>
+</Alert>
+```
+
+## With Icons
+
+Add an icon to the alert using the `icon` prop:
+
+<Canvas of={AlertStories.WithIcon} />
+
+```tsx
+<Alert icon={<Text style={{ fontSize: 20 }}>ℹ️</Text>}>
+  <AlertTitle>Information</AlertTitle>
+  <AlertDescription>This is an informational alert.</AlertDescription>
+</Alert>
+```
+
+## Title Only
+
+<Canvas of={AlertStories.TitleOnly} />
+
+```tsx
+<Alert>
+  <AlertTitle>Simple notification message</AlertTitle>
+</Alert>
+```
+
+## Custom Theme
+
+Override theme values at the component level:
+
+<Canvas of={AlertStories.CustomTheme} />
+
+```tsx
+<Alert
+  themeOverride={{
+    shadow: { offsetX: 6, offsetY: 6 },
+    border: { radius: 12 },
+  }}
+>
+  <AlertTitle>Custom Styled</AlertTitle>
+  <AlertDescription>Uses custom shadow and border radius.</AlertDescription>
+</Alert>
+```
+
+## Without Shadow
+
+Pass `shadowStyle={null}` to remove the shadow:
+
+<Canvas of={AlertStories.NoShadow} />
+
+```tsx
+<Alert shadowStyle={null}>
+  <AlertTitle>No Shadow</AlertTitle>
+  <AlertDescription>This alert has no shadow effect.</AlertDescription>
+</Alert>
+```
+
+## Props
+
+### Alert
+
+<ArgTypes of={AlertStories} />
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'destructive'` | `'default'` | Visual style variant |
+| `icon` | `ReactNode` | - | Icon to display on the left |
+| `style` | `ViewStyle` | - | Override container styles |
+| `shadowStyle` | `ViewStyle \| null` | - | Override shadow styles, `null` to hide |
+| `themeOverride` | `NeobrutalismThemeOverride` | - | Component-level theme overrides |
+| `accessibilityRole` | `'alert' \| 'none'` | `'alert'` | Accessibility role |
+
+### AlertTitle
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Title content |
+| `style` | `TextStyle` | Override text styles |
+
+### AlertDescription
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Description content |
+| `style` | `TextStyle` | Override text styles |
+
+## Accessibility
+
+The Alert component includes built-in accessibility support:
+
+- `accessibilityRole="alert"` is set by default for important notifications
+- Screen readers will announce the alert content
+- Use `accessibilityRole="none"` for non-urgent information

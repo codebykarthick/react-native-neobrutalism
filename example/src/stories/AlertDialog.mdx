@@ -1,0 +1,189 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as AlertDialogStories from './AlertDialog.stories';
+
+<Meta of={AlertDialogStories} />
+
+# Alert Dialog
+
+A modal dialog that interrupts the user with important content and expects a response.
+
+## Import
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from 'react-native-neobrutalism';
+```
+
+## Basic Usage
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger>
+    <Button label="Delete" variant="danger" />
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction onPress={handleDelete}>Delete</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+<Canvas of={AlertDialogStories.Default} />
+
+## Confirmation Dialog
+
+A common pattern for confirming user actions:
+
+<Canvas of={AlertDialogStories.ConfirmationDialog} />
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger>
+    <Button label="Publish Changes" variant="primary" />
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Publish Changes</AlertDialogTitle>
+      <AlertDialogDescription>
+        Are you sure you want to publish? Changes will be visible immediately.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel />
+      <AlertDialogAction>Publish</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## With Icon
+
+Add icons to make the dialog more visually informative:
+
+<Canvas of={AlertDialogStories.WarningDialog} />
+
+```tsx
+<AlertDialogHeader>
+  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+    <Text style={{ fontSize: 24 }}>⚠️</Text>
+    <AlertDialogTitle>Warning</AlertDialogTitle>
+  </View>
+  <AlertDialogDescription>
+    This action may have unexpected consequences.
+  </AlertDialogDescription>
+</AlertDialogHeader>
+```
+
+## Controlled State
+
+Control the dialog state externally:
+
+<Canvas of={AlertDialogStories.ControlledState} />
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<AlertDialog open={open} onOpenChange={setOpen}>
+  <AlertDialogTrigger>
+    <Button label="Open Dialog" />
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    {/* ... */}
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## Custom Theme
+
+<Canvas of={AlertDialogStories.CustomTheme} />
+
+```tsx
+<AlertDialog
+  themeOverride={{
+    shadow: { offsetX: 6, offsetY: 6 },
+    colors: { primary: '#FF6B6B' },
+  }}
+>
+  {/* ... */}
+</AlertDialog>
+```
+
+## Props
+
+### AlertDialog
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Default open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when state changes |
+| `themeOverride` | `NeobrutalismThemeOverride` | - | Theme overrides |
+
+### AlertDialogTrigger
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Trigger element (usually a Button) |
+
+### AlertDialogContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `style` | `ViewStyle` | - | Content container styles |
+| `overlayStyle` | `ViewStyle` | - | Overlay/backdrop styles |
+| `shadowStyle` | `ViewStyle \| null` | - | Shadow styles, `null` to hide |
+| `animationType` | `'none' \| 'slide' \| 'fade'` | `'fade'` | Modal animation |
+
+### AlertDialogHeader / AlertDialogFooter
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Content |
+| `style` | `ViewStyle` | Override styles |
+
+### AlertDialogTitle / AlertDialogDescription
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Text content |
+| `style` | `TextStyle` | Override text styles |
+
+### AlertDialogAction / AlertDialogCancel
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Button label |
+| `onPress` | `() => void` | Press handler (also closes dialog) |
+| `style` | `ViewStyle` | Button styles |
+| `textStyle` | `TextStyle` | Text styles |
+
+## Accessibility
+
+- `accessibilityViewIsModal` is set on the Modal
+- Focus is trapped within the dialog when open
+- Android back button closes the dialog
+- Use descriptive titles and descriptions for screen readers
+
+## Best Practices
+
+1. **Use for important actions**: Reserve AlertDialog for actions that require explicit user confirmation
+2. **Clear action labels**: Use descriptive button text like "Delete Account" instead of just "OK"
+3. **Explain consequences**: The description should clearly explain what will happen
+4. **Provide escape**: Always include a cancel/dismiss option

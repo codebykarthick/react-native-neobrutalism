@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/react-native-web-vite';
 import { mergeConfig } from 'vite';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import remarkGfm from 'remark-gfm';
 
 function getAbsolutePath(value: string): string {
   return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
@@ -17,7 +18,16 @@ const config: StorybookConfig = {
     getAbsolutePath('@chromatic-com/storybook'),
     getAbsolutePath('@storybook/addon-vitest'),
     getAbsolutePath('@storybook/addon-a11y'),
-    getAbsolutePath('@storybook/addon-docs'),
+    {
+      name: getAbsolutePath('@storybook/addon-docs'),
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
 
   framework: {

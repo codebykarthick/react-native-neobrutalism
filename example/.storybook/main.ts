@@ -20,7 +20,19 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-docs'),
   ],
 
-  framework: getAbsolutePath('@storybook/react-native-web-vite'),
+  framework: {
+    name: getAbsolutePath('@storybook/react-native-web-vite'),
+    options: {
+      pluginReactOptions: {
+        babel: {
+          plugins: [
+            '@babel/plugin-transform-export-namespace-from',
+            'react-native-reanimated/plugin',
+          ],
+        },
+      },
+    },
+  },
 
   async viteFinal(config) {
     return mergeConfig(config, {

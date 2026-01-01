@@ -42,12 +42,6 @@ export const Default: Story = {
   render: () => (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
-        <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        <AccordionContent>
-          <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
         <AccordionTrigger>Is it styled?</AccordionTrigger>
         <AccordionContent>
           <Text>
@@ -56,7 +50,7 @@ export const Default: Story = {
           </Text>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="item-3">
+      <AccordionItem value="item-2">
         <AccordionTrigger>Is it animated?</AccordionTrigger>
         <AccordionContent>
           <Text>

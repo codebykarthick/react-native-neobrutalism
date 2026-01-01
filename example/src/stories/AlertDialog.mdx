@@ -1,4 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as AlertDialogStories from './AlertDialog.stories';
 
 <Meta of={AlertDialogStories} />
@@ -27,7 +27,7 @@ import {
 
 ```tsx
 <AlertDialog>
-  <AlertDialogTrigger>
+  <AlertDialogTrigger asChild>
     <Button label="Delete" variant="danger" />
   </AlertDialogTrigger>
   <AlertDialogContent>
@@ -55,7 +55,7 @@ A common pattern for confirming user actions:
 
 ```tsx
 <AlertDialog>
-  <AlertDialogTrigger>
+  <AlertDialogTrigger asChild>
     <Button label="Publish Changes" variant="primary" />
   </AlertDialogTrigger>
   <AlertDialogContent>
@@ -101,7 +101,7 @@ Control the dialog state externally:
 const [open, setOpen] = useState(false);
 
 <AlertDialog open={open} onOpenChange={setOpen}>
-  <AlertDialogTrigger>
+  <AlertDialogTrigger asChild>
     <Button label="Open Dialog" />
   </AlertDialogTrigger>
   <AlertDialogContent>
@@ -127,6 +127,10 @@ const [open, setOpen] = useState(false);
 
 ## Props
 
+### AlertDialog (auto-generated)
+
+<ArgTypes of={AlertDialogStories} />
+
 ### AlertDialog
 
 | Prop | Type | Default | Description |
@@ -138,9 +142,10 @@ const [open, setOpen] = useState(false);
 
 ### AlertDialogTrigger
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `children` | `ReactNode` | Trigger element (usually a Button) |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Trigger element (usually a Button) |
+| `asChild` | `boolean` | `false` | If true, merges onPress into child instead of wrapping in Pressable. Use with Button components. |
 
 ### AlertDialogContent
 

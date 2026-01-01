@@ -28,6 +28,20 @@ const meta: Meta<typeof AlertDialog> = {
       </NeobrutalismThemeProvider>
     ),
   ],
+  argTypes: {
+    open: {
+      control: 'boolean',
+      description: 'Controlled open state',
+    },
+    defaultOpen: {
+      control: 'boolean',
+      description: 'Default open state (uncontrolled)',
+    },
+    onOpenChange: {
+      action: 'onOpenChange',
+      description: 'Callback when open state changes',
+    },
+  },
 };
 
 export default meta;
@@ -38,7 +52,7 @@ type Story = StoryObj<typeof AlertDialog>;
 export const Default: Story = {
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <Button label="Delete Account" variant="danger" />
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -64,7 +78,7 @@ export const Default: Story = {
 export const ConfirmationDialog: Story = {
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <Button label="Publish Changes" variant="primary" />
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -88,13 +102,21 @@ export const ConfirmationDialog: Story = {
 export const WarningDialog: Story = {
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <Button label="Reset Settings" variant="warning" />
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-            <Text style={{ fontSize: 24 }}>⚠️</Text>
+            <Text
+              style={{
+                fontSize: 24,
+                fontFamily:
+                  'Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif',
+              }}
+            >
+              ⚠️
+            </Text>
             <AlertDialogTitle>Reset Settings</AlertDialogTitle>
           </View>
           <AlertDialogDescription>
@@ -115,7 +137,7 @@ export const WarningDialog: Story = {
 export const LogoutConfirmation: Story = {
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <Button label="Log Out" variant="secondary" />
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -145,7 +167,7 @@ export const ControlledState: Story = {
           Dialog is: {open ? 'Open' : 'Closed'}
         </Text>
         <AlertDialog open={open} onOpenChange={setOpen}>
-          <AlertDialogTrigger>
+          <AlertDialogTrigger asChild>
             <Button label="Open Controlled Dialog" />
           </AlertDialogTrigger>
           <AlertDialogContent>
@@ -184,7 +206,7 @@ export const CustomTheme: Story = {
   ],
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <Button label="Custom Themed Dialog" />
       </AlertDialogTrigger>
       <AlertDialogContent>

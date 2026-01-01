@@ -28,6 +28,9 @@ export interface AlertDialogProps {
 export interface AlertDialogTriggerProps {
   /** Trigger element (usually a Button) */
   children: ReactNode;
+
+  /** If true, merges onPress into child element instead of wrapping in Pressable */
+  asChild?: boolean;
 }
 
 /**

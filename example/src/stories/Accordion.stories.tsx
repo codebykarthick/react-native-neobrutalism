@@ -22,13 +22,19 @@ const meta: Meta<typeof Accordion> = {
       </NeobrutalismThemeProvider>
     ),
   ],
+  args: {
+    type: 'single',
+    collapsible: true,
+  },
   argTypes: {
     type: {
       control: 'select',
       options: ['single', 'multiple'],
+      description: 'Expansion mode - single or multiple items open',
     },
     collapsible: {
       control: 'boolean',
+      description: 'Allow collapsing all items (single mode only)',
     },
   },
 };
@@ -36,6 +42,41 @@ const meta: Meta<typeof Accordion> = {
 export default meta;
 
 type Story = StoryObj<typeof Accordion>;
+
+// Playground - responds to controls
+export const Playground: Story = {
+  render: (args) => (
+    <Accordion type={args.type} collapsible={args.collapsible}>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>First Section</AccordionTrigger>
+        <AccordionContent>
+          <Text>
+            This is the content for the first section. Try changing the controls
+            to see how the accordion behaves.
+          </Text>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Second Section</AccordionTrigger>
+        <AccordionContent>
+          <Text>
+            Content for the second section. In "multiple" mode, you can open
+            multiple sections at once.
+          </Text>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Third Section</AccordionTrigger>
+        <AccordionContent>
+          <Text>
+            Third section content. Toggle "collapsible" to control whether all
+            items can be closed.
+          </Text>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+};
 
 // Default
 export const Default: Story = {
@@ -91,9 +132,8 @@ export const Multiple: Story = {
         <AccordionTrigger>Features</AccordionTrigger>
         <AccordionContent>
           <Text>
-            • Cross-platform support{'\n'}
-            • Smooth animations{'\n'}
-            • Customizable themes
+            • Cross-platform support{'\n'}• Smooth animations{'\n'}•
+            Customizable themes
           </Text>
         </AccordionContent>
       </AccordionItem>
@@ -201,9 +241,7 @@ export const ControlledState: Story = {
     const [value, setValue] = React.useState<string>('');
     return (
       <View style={{ gap: 16 }}>
-        <Text style={{ fontSize: 16 }}>
-          Currently open: {value || 'none'}
-        </Text>
+        <Text style={{ fontSize: 16 }}>Currently open: {value || 'none'}</Text>
         <Accordion
           type="single"
           collapsible
@@ -284,9 +322,7 @@ export const FAQExample: Story = {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="faq-2">
-          <AccordionTrigger>
-            How do I customize the theme?
-          </AccordionTrigger>
+          <AccordionTrigger>How do I customize the theme?</AccordionTrigger>
           <AccordionContent>
             <Text>
               Wrap your app with NeobrutalismThemeProvider and pass a theme prop

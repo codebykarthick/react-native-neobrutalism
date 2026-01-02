@@ -1,0 +1,269 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as BreadcrumbStories from './Breadcrumb.stories';
+
+<Meta of={BreadcrumbStories} />
+
+# Breadcrumb
+
+A navigation component that displays the current page location within a hierarchical structure.
+
+## Import
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from 'react-native-neobrutalism';
+```
+
+## Basic Usage
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink onPress={() => navigate('/')}>Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink onPress={() => navigate('/products')}>Products</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Current Page</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+<Canvas of={BreadcrumbStories.Default} />
+
+## Two Items
+
+A simple breadcrumb with just two levels:
+
+<Canvas of={BreadcrumbStories.TwoItems} />
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink onPress={() => {}}>Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Dashboard</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+## Long Breadcrumb
+
+Breadcrumbs with many levels wrap naturally:
+
+<Canvas of={BreadcrumbStories.LongBreadcrumb} />
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink onPress={() => {}}>Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink onPress={() => {}}>Category</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink onPress={() => {}}>Subcategory</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink onPress={() => {}}>Product Type</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Product Details</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+## Custom Separators
+
+### Slash Separator
+
+<Canvas of={BreadcrumbStories.CustomSeparator} />
+
+```tsx
+<BreadcrumbSeparator>/</BreadcrumbSeparator>
+```
+
+### Arrow Separator
+
+<Canvas of={BreadcrumbStories.ArrowSeparator} />
+
+```tsx
+<BreadcrumbSeparator>→</BreadcrumbSeparator>
+```
+
+### Custom Icon Separator
+
+<Canvas of={BreadcrumbStories.IconSeparator} />
+
+```tsx
+<BreadcrumbSeparator>
+  <Text style={{ fontSize: 10, opacity: 0.5 }}>●</Text>
+</BreadcrumbSeparator>
+```
+
+## Disabled Links
+
+Disable specific breadcrumb links:
+
+<Canvas of={BreadcrumbStories.DisabledLink} />
+
+```tsx
+<BreadcrumbLink onPress={() => {}} disabled>
+  Home (Disabled)
+</BreadcrumbLink>
+```
+
+## Custom Theme
+
+Override theme values for the entire breadcrumb:
+
+<Canvas of={BreadcrumbStories.CustomTheme} />
+
+```tsx
+<Breadcrumb
+  themeOverride={{
+    colors: { foreground: '#1a1a2e' },
+    spacing: { xs: 8, sm: 12 },
+  }}
+>
+  <BreadcrumbList>
+    {/* items */}
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+## Component Structure
+
+The Breadcrumb component uses a composable structure:
+
+| Component | Purpose |
+|-----------|---------|
+| `Breadcrumb` | Root wrapper that provides context |
+| `BreadcrumbList` | Flex container for items (horizontal row) |
+| `BreadcrumbItem` | Wrapper for individual breadcrumb entries |
+| `BreadcrumbLink` | Clickable navigation link |
+| `BreadcrumbPage` | Current page indicator (non-clickable) |
+| `BreadcrumbSeparator` | Visual divider between items |
+
+## Props
+
+### Breadcrumb
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **required** | BreadcrumbList content |
+| `style` | `ViewStyle` | - | Container styles |
+| `themeOverride` | `NeobrutalismThemeOverride` | - | Theme overrides for all children |
+| `accessibilityLabel` | `string` | `'Breadcrumb'` | Accessibility label |
+
+### BreadcrumbList
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **required** | BreadcrumbItems and BreadcrumbSeparators |
+| `style` | `ViewStyle` | - | Container styles |
+
+### BreadcrumbItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **required** | BreadcrumbLink or BreadcrumbPage |
+| `style` | `ViewStyle` | - | Container styles |
+
+### BreadcrumbLink
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **required** | Link text or element |
+| `onPress` | `() => void` | - | Press handler for navigation |
+| `disabled` | `boolean` | `false` | Disable the link |
+| `style` | `ViewStyle` | - | Container styles |
+| `textStyle` | `TextStyle` | - | Text styles |
+
+### BreadcrumbPage
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **required** | Page text or element |
+| `style` | `ViewStyle` | - | Container styles |
+| `textStyle` | `TextStyle` | - | Text styles |
+
+### BreadcrumbSeparator
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | `'›'` | Custom separator content |
+| `style` | `ViewStyle` | - | Container styles |
+
+## Accessibility
+
+The Breadcrumb component includes built-in accessibility support:
+
+- `accessibilityRole="link"` on BreadcrumbLink
+- `accessibilityState={{ disabled }}` reflects disabled state
+- `aria-current="page"` on BreadcrumbPage
+- `aria-hidden` on separators (decorative)
+
+```tsx
+<BreadcrumbLink
+  onPress={() => navigate('/home')}
+  accessibilityLabel="Navigate to home page"
+>
+  Home
+</BreadcrumbLink>
+```
+
+## Usage with Navigation
+
+Integrate with React Navigation or other navigation libraries:
+
+```tsx
+import { useNavigation } from '@react-navigation/native';
+
+function MyBreadcrumb() {
+  const navigation = useNavigation();
+
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink onPress={() => navigation.navigate('Home')}>
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink onPress={() => navigation.navigate('Products')}>
+            Products
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Product Details</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}
+```

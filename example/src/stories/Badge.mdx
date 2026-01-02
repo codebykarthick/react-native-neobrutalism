@@ -1,0 +1,148 @@
+import { Meta, ArgTypes, Canvas } from '@storybook/addon-docs/blocks';
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+A neobrutalism-styled badge component for displaying status, labels, or tags.
+
+## Import
+
+```tsx
+import { Badge } from 'react-native-neobrutalism';
+```
+
+## Basic Usage
+
+```tsx
+<Badge>Default</Badge>
+```
+
+<Canvas of={BadgeStories.Default} />
+
+## Variants
+
+Six visual variants are available:
+
+<Canvas of={BadgeStories.AllVariants} />
+
+```tsx
+<Badge variant="primary">Primary</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="danger">Danger</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="neutral">Neutral</Badge>
+```
+
+## With Icons
+
+Add an icon before the badge text:
+
+<Canvas of={BadgeStories.AllWithIcons} />
+
+```tsx
+<Badge variant="success" icon={<Text>✓</Text>}>
+  Verified
+</Badge>
+
+<Badge variant="danger" icon={<Text>✕</Text>}>
+  Error
+</Badge>
+
+<Badge variant="warning" icon={<Text>⚠</Text>}>
+  Warning
+</Badge>
+```
+
+## Without Shadow
+
+Remove the shadow by passing `shadowStyle={null}`:
+
+<Canvas of={BadgeStories.NoShadow} />
+
+```tsx
+<Badge shadowStyle={null}>No Shadow</Badge>
+```
+
+## Custom Styling
+
+Override styles at the component level:
+
+```tsx
+<Badge
+  style={{ backgroundColor: 'purple', paddingHorizontal: 16 }}
+  textStyle={{ color: 'white', fontSize: 14 }}
+>
+  Custom
+</Badge>
+```
+
+## Component-Level Theme Override
+
+Override theme values for a specific badge:
+
+<Canvas of={BadgeStories.CustomTheme} />
+
+```tsx
+<Badge
+  themeOverride={{
+    colors: { primary: '#FF6B6B', primaryForeground: '#FFFFFF' },
+    shadow: { offsetX: 3, offsetY: 3 },
+    border: { radius: 12 },
+  }}
+>
+  Custom Theme
+</Badge>
+```
+
+## In Context
+
+Badges work great alongside other content:
+
+<Canvas of={BadgeStories.InContext} />
+
+```tsx
+<View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+  <Text style={{ fontSize: 16, fontWeight: '600' }}>Product Name</Text>
+  <Badge variant="success">In Stock</Badge>
+  <Badge variant="primary">New</Badge>
+</View>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **required** | Badge content (text or elements) |
+| `variant` | `'primary' \| 'secondary' \| 'warning' \| 'danger' \| 'success' \| 'neutral'` | `'primary'` | Visual variant |
+| `icon` | `ReactNode` | - | Optional icon on the left side |
+| `style` | `ViewStyle` | - | Override container styles |
+| `textStyle` | `TextStyle` | - | Override text styles |
+| `shadowStyle` | `ViewStyle \| null` | - | Override shadow styles, `null` to hide |
+| `themeOverride` | `NeobrutalismThemeOverride` | - | Component-level theme overrides |
+| `accessibilityLabel` | `string` | - | Accessibility label |
+
+## Accessibility
+
+The Badge component is primarily decorative, but you can add accessibility support:
+
+```tsx
+<Badge
+  variant="success"
+  accessibilityLabel="Status: Active"
+>
+  Active
+</Badge>
+```
+
+## Styling Details
+
+The badge uses compact styling with:
+
+- Small padding: `paddingHorizontal: spacing.sm`, `paddingVertical: spacing.xs`
+- 2px border with theme border color
+- Smaller shadow offset (half of standard)
+- 12px font size with 600 font weight
+- 4px gap between icon and text

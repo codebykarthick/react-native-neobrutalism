@@ -80,5 +80,27 @@ export type {
   UseAccordionAnimationReturn,
 } from './accordion';
 
+// Badge exports
+export { Badge } from './badge';
+export type { BadgeProps, BadgeVariant } from './badge';
+
+// Breadcrumb exports
+export {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from './breadcrumb';
+export type {
+  BreadcrumbProps,
+  BreadcrumbListProps,
+  BreadcrumbItemProps,
+  BreadcrumbLinkProps,
+  BreadcrumbPageProps,
+  BreadcrumbSeparatorProps,
+} from './breadcrumb';
+
 // Utility exports
 export { deepMerge } from './utils';

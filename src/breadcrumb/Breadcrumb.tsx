@@ -2,7 +2,10 @@ import { useMemo } from 'react';
 import type { JSX } from 'react';
 import { View } from 'react-native';
 import { BreadcrumbContext } from './BreadcrumbContext';
-import type { BreadcrumbProps, BreadcrumbContextValue } from './Breadcrumb.types';
+import type {
+  BreadcrumbProps,
+  BreadcrumbContextValue,
+} from './Breadcrumb.types';
 
 /**
  * Root Breadcrumb component that provides context for child components.

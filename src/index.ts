@@ -102,5 +102,25 @@ export type {
   BreadcrumbSeparatorProps,
 } from './breadcrumb';
 
+// Calendar exports
+export {
+  Calendar,
+  CalendarHeader,
+  CalendarDay,
+  CalendarGrid,
+  CalendarContext,
+  useCalendarContext,
+} from './calendar';
+export type {
+  CalendarProps,
+  CalendarMode,
+  CalendarTone,
+  DateRange,
+  CalendarContextValue,
+  CalendarHeaderProps,
+  CalendarDayProps,
+  CalendarGridProps,
+} from './calendar';
+
 // Utility exports
 export { deepMerge } from './utils';

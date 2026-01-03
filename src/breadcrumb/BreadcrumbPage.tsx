@@ -45,11 +45,7 @@ export function BreadcrumbPage({
   );
 
   return (
-    <View
-      style={style}
-      accessibilityRole="text"
-      aria-current="page"
-    >
+    <View style={style} accessibilityRole="text" aria-current="page">
       {typeof children === 'string' ? (
         <Text style={[computedTextStyle, textStyle]}>{children}</Text>
       ) : (

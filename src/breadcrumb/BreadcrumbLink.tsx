@@ -50,10 +50,7 @@ export function BreadcrumbLink({
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={({ pressed }) => [
-        style,
-        { opacity: pressed ? 0.7 : 1 },
-      ]}
+      style={({ pressed }) => [style, { opacity: pressed ? 0.7 : 1 }]}
       accessibilityRole="link"
       accessibilityState={{ disabled }}
     >

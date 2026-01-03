@@ -1,0 +1,164 @@
+import { Meta, ArgTypes, Canvas, Story } from '@storybook/addon-docs/blocks';
+import * as InputStories from './Input.stories';
+
+<Meta of={InputStories} />
+
+# Input
+
+A neobrutalism-styled text input component for form fields.
+
+## Import
+
+```tsx
+import { Input } from 'react-native-neobrutalism';
+```
+
+## Basic Usage
+
+```tsx
+<Input placeholder="Enter text..." />
+```
+
+<Canvas of={InputStories.Default} />
+
+## Input Types
+
+### Email
+
+<Canvas of={InputStories.Email} />
+
+```tsx
+<Input
+  placeholder="m@example.com"
+  keyboardType="email-address"
+  autoCapitalize="none"
+  autoComplete="email"
+/>
+```
+
+### Password
+
+<Canvas of={InputStories.Password} />
+
+```tsx
+<Input
+  placeholder="Enter your password"
+  secureTextEntry
+  autoComplete="password"
+/>
+```
+
+## States
+
+### Disabled
+
+<Canvas of={InputStories.Disabled} />
+
+```tsx
+<Input placeholder="Disabled input" editable={false} />
+```
+
+### Error
+
+<Canvas of={InputStories.Error} />
+
+```tsx
+<Input placeholder="Invalid input" error />
+```
+
+### All States
+
+<Canvas of={InputStories.AllStates} />
+
+## With Labels
+
+<Canvas of={InputStories.WithLabel} />
+
+```tsx
+<View style={{ gap: 4 }}>
+  <Text style={{ fontWeight: '500' }}>Email</Text>
+  <Input placeholder="m@example.com" keyboardType="email-address" />
+</View>
+```
+
+## With Error Message
+
+<Canvas of={InputStories.WithErrorAndLabel} />
+
+```tsx
+<View style={{ gap: 4 }}>
+  <Text style={{ fontWeight: '500' }}>Email</Text>
+  <Input placeholder="m@example.com" error defaultValue="invalid-email" />
+  <Text style={{ fontSize: 12, color: '#FF6B6B' }}>
+    Please enter a valid email address
+  </Text>
+</View>
+```
+
+## Form Example
+
+<Canvas of={InputStories.FormExample} />
+
+## Subscription Form
+
+A common pattern combining Input with Button:
+
+<Canvas of={InputStories.SubscriptionForm} />
+
+```tsx
+<View style={{ flexDirection: 'row', gap: 8 }}>
+  <Input
+    placeholder="Enter your email"
+    keyboardType="email-address"
+    style={{ flex: 1 }}
+  />
+  <Button label="Subscribe" />
+</View>
+```
+
+## Custom Theme
+
+<Canvas of={InputStories.CustomTheme} />
+
+```tsx
+<Input
+  placeholder="Custom styled"
+  themeOverride={{
+    border: { radius: 12 },
+    colors: { primary: '#FF6B6B' },
+  }}
+/>
+```
+
+## Props
+
+<ArgTypes of={InputStories} />
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | - | Placeholder text |
+| `style` | `ViewStyle` | - | Override container styles |
+| `inputStyle` | `TextStyle` | - | Override text input styles |
+| `themeOverride` | `NeobrutalismThemeOverride` | - | Component-level theme overrides |
+| `error` | `boolean` | `false` | Show error state (red border) |
+| `fullWidth` | `boolean` | `false` | Stretch to fill container width |
+| `editable` | `boolean` | `true` | Whether input is editable |
+| `secureTextEntry` | `boolean` | `false` | Hide text (for passwords) |
+| `keyboardType` | `KeyboardTypeOptions` | `'default'` | Keyboard type to display |
+| `autoCapitalize` | `'none' \| 'sentences' \| 'words' \| 'characters'` | - | Auto-capitalization behavior |
+| `autoComplete` | `string` | - | Autofill hint |
+
+All standard React Native `TextInputProps` are also supported.
+
+## Focus Behavior
+
+The Input component shows a colored border when focused:
+- **Default**: Uses `theme.border.color` (black)
+- **Focused**: Uses `theme.colors.primary` (blue)
+- **Error**: Uses `theme.colors.danger` (red)
+
+## Accessibility
+
+- `accessibilityState.disabled` is automatically set based on `editable` prop
+- Use descriptive `placeholder` text or pair with a visible label
+- Consider using `accessibilityLabel` for screen reader context

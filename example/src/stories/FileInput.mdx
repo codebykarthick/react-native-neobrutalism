@@ -1,0 +1,211 @@
+import { Meta, ArgTypes, Canvas, Story } from '@storybook/addon-docs/blocks';
+import * as FileInputStories from './FileInput.stories';
+
+<Meta of={FileInputStories} />
+
+# FileInput
+
+A neobrutalism-styled file input component for file upload interfaces.
+
+> **Note:** This is a visual-only component. It does not include file picker functionality to keep the library minimal and flexible. You need to connect it to a file picker library of your choice (e.g., `expo-document-picker`, `react-native-document-picker`, `expo-image-picker`).
+
+## Import
+
+```tsx
+import { FileInput } from 'react-native-neobrutalism';
+```
+
+## Basic Usage
+
+```tsx
+<FileInput
+  placeholder="No file chosen"
+  onPress={() => {
+    // Connect to your file picker library
+  }}
+/>
+```
+
+<Canvas of={FileInputStories.Default} />
+
+## With Selected File
+
+Pass the `value` prop to display a selected file name:
+
+<Canvas of={FileInputStories.WithSelectedFile} />
+
+```tsx
+<FileInput
+  value="document.pdf"
+  onPress={handlePickFile}
+/>
+```
+
+## With Icon
+
+<Canvas of={FileInputStories.WithIcon} />
+
+```tsx
+<FileInput
+  placeholder="No file chosen"
+  icon={<Text>📁</Text>}
+  onPress={handlePickFile}
+/>
+```
+
+## States
+
+### Disabled
+
+<Canvas of={FileInputStories.Disabled} />
+
+```tsx
+<FileInput placeholder="File upload disabled" disabled />
+```
+
+### Error
+
+<Canvas of={FileInputStories.Error} />
+
+```tsx
+<FileInput placeholder="No file chosen" error />
+```
+
+## Interactive Example
+
+<Canvas of={FileInputStories.Interactive} />
+
+## Integration Examples
+
+### With expo-document-picker
+
+```tsx
+import * as DocumentPicker from 'expo-document-picker';
+import { FileInput } from 'react-native-neobrutalism';
+
+function MyForm() {
+  const [fileName, setFileName] = useState<string>();
+
+  const handlePickDocument = async () => {
+    const result = await DocumentPicker.getDocumentAsync({
+      type: ['application/pdf', 'image/*'],
+    });
+
+    if (!result.canceled && result.assets[0]) {
+      setFileName(result.assets[0].name);
+    }
+  };
+
+  return (
+    <FileInput
+      placeholder="Choose a file"
+      value={fileName}
+      onPress={handlePickDocument}
+    />
+  );
+}
+```
+
+### With react-native-document-picker
+
+```tsx
+import DocumentPicker from 'react-native-document-picker';
+import { FileInput } from 'react-native-neobrutalism';
+
+function MyForm() {
+  const [fileName, setFileName] = useState<string>();
+
+  const handlePickDocument = async () => {
+    try {
+      const result = await DocumentPicker.pick({
+        type: [DocumentPicker.types.pdf, DocumentPicker.types.images],
+      });
+      setFileName(result[0].name);
+    } catch (err) {
+      if (!DocumentPicker.isCancel(err)) {
+        console.error(err);
+      }
+    }
+  };
+
+  return (
+    <FileInput
+      placeholder="Choose a file"
+      value={fileName}
+      onPress={handlePickDocument}
+    />
+  );
+}
+```
+
+### With expo-image-picker
+
+```tsx
+import * as ImagePicker from 'expo-image-picker';
+import { FileInput } from 'react-native-neobrutalism';
+
+function ProfilePicturePicker() {
+  const [imageName, setImageName] = useState<string>();
+
+  const handlePickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 1,
+    });
+
+    if (!result.canceled && result.assets[0]) {
+      const uri = result.assets[0].uri;
+      const name = uri.split('/').pop() || 'image.jpg';
+      setImageName(name);
+    }
+  };
+
+  return (
+    <FileInput
+      placeholder="Choose an image"
+      value={imageName}
+      icon={<Text>🖼️</Text>}
+      onPress={handlePickImage}
+    />
+  );
+}
+```
+
+## Form Example
+
+<Canvas of={FileInputStories.FormWithFileUpload} />
+
+## Multiple File Inputs
+
+<Canvas of={FileInputStories.MultipleFileInputs} />
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | `'No file chosen'` | Text shown when no file is selected |
+| `value` | `string` | - | Selected file name to display |
+| `onPress` | `() => void` | - | Called when the input is pressed |
+| `disabled` | `boolean` | `false` | Whether the input is disabled |
+| `error` | `boolean` | `false` | Show error state (red border) |
+| `fullWidth` | `boolean` | `false` | Stretch to fill container width |
+| `icon` | `ReactNode` | - | Icon to display in the button |
+| `style` | `ViewStyle` | - | Override container styles |
+| `textStyle` | `TextStyle` | - | Override text styles |
+| `themeOverride` | `NeobrutalismThemeOverride` | - | Component-level theme overrides |
+| `accessibilityLabel` | `string` | `'Choose file'` | Accessibility label |
+
+## Recommended File Picker Libraries
+
+| Library | Platform | Use Case |
+|---------|----------|----------|
+| `expo-document-picker` | Expo | General documents |
+| `expo-image-picker` | Expo | Images and videos |
+| `react-native-document-picker` | Bare RN | General documents |
+| `react-native-image-picker` | Bare RN | Images and videos |
+
+## Accessibility
+
+- `accessibilityRole="button"` is set automatically
+- `accessibilityLabel` defaults to "Choose file"
+- `accessibilityState.disabled` reflects the disabled state

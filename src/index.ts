@@ -122,5 +122,30 @@ export type {
   CalendarGridProps,
 } from './calendar';
 
+// Card exports
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  CardContext,
+  useCardContext,
+} from './card';
+export type {
+  CardProps,
+  CardHeaderProps,
+  CardTitleProps,
+  CardDescriptionProps,
+  CardContentProps,
+  CardFooterProps,
+  CardContextValue,
+} from './card';
+
+// Input exports
+export { Input, FileInput } from './input';
+export type { InputProps, FileInputProps } from './input';
+
 // Utility exports
 export { deepMerge } from './utils';
